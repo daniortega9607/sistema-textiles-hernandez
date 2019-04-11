@@ -4,6 +4,7 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 export const routes = [
+  { path: '/login', name: 'login', component: () => import('./views/Login.vue') },
   { 
     path: '/',
     component: () => import('./views/App.vue'),
@@ -19,7 +20,6 @@ export const routes = [
       requiresAuth: true,
     }
   },
-  { path: '/login', name: 'login', component: () => import('./views/Login.vue') }
 ];
 
 const router = new Router({ mode: 'history', base: process.env.BASE_URL, routes });
