@@ -22,6 +22,7 @@ const Sale = {
     //search: ['office.name', 'product.sku', 'fabric.name', 'design.name', 'color.name', 'stock'],
     list: {
       office_id: { align: 'left', formatter: Office.formatter, sortable: false },
+      created_at: { align: 'left' },
       customer_id: { align: 'left', formatter: Customer.formatter },
       commission: { align: 'right', type: 'number' },
       balance: { align: 'right', type: 'number' },
@@ -52,6 +53,7 @@ const Sale = {
   },
   fields: {
     office_id: { display_name: 'Sucursal' },
+    created_at: { display_name: 'Fecha' },
     customer_id: { display_name: 'Cliente' },
     //revenue: { display_name: 'Ganancia' },
     commission: { display_name: 'Comisión' },
