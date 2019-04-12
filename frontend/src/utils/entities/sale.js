@@ -19,7 +19,7 @@ const Sale = {
   url: 'ventas',
   hideAddButton: true,
   field_configs: {
-    search: ['office.name', 'customer.name'],
+    search: ['office.name', 'customer.first_name', 'customer.last_name'],
     list: {
       office_id: { align: 'left', formatter: Office.formatter, sortable: false },
       created_at: { align: 'left' },
