@@ -19,7 +19,7 @@ const Sale = {
   url: 'ventas',
   hideAddButton: true,
   field_configs: {
-    //search: ['office.name', 'product.sku', 'fabric.name', 'design.name', 'color.name', 'stock'],
+    search: ['office.name', 'customer.name'],
     list: {
       office_id: { align: 'left', formatter: Office.formatter, sortable: false },
       created_at: { align: 'left' },
@@ -27,14 +27,9 @@ const Sale = {
       commission: { align: 'right', type: 'number' },
       balance: { align: 'right', type: 'number' },
       total: { align: 'right', type: 'number' },
-
-      /*fabric: { align: 'left', formatter: Fabric.formatter },
-      design: { align: 'left', formatter: Design.formatter },
-      color: { align: 'left', formatter: Color.formatter, sortable: false },
-      stock: { align: 'right', type: 'number' },*/
     },
     form: {
-      office_id: {
+      /*office_id: {
         required: true,
         formatter: AutocompleteBox,
         formatter_options: { entity: Office, fromStore: true },
