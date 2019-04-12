@@ -1,3 +1,10 @@
+const Formatter = ({ props }) => {
+  const customer = props.customer || props;
+  return (
+    <div>{customer.first_name} {customer.last_name}</div>
+  );
+};
+
 const Customer = {
   name: 'Customer',
   display_name: 'Cliente',
@@ -70,6 +77,7 @@ const Customer = {
     use_cfdi: { display_name: 'Uso CFDI' },
     zip_code: { display_name: 'Codigo Postal' },
   },
+  formatter: Formatter
 };
 
 export default Customer;

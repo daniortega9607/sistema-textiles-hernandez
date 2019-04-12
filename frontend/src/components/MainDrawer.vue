@@ -17,7 +17,7 @@
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile
-        v-if="$store.state.auth.user.superadmin"
+        v-if="$store.state.auth.user.user_type == 1"
         @click="$router.push('/almacen')"
       >
         <v-list-tile-action>
@@ -25,6 +25,17 @@
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>Almacen</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-list-tile
+        v-if="$store.state.auth.user.user_type == 1"
+        @click="$router.push('/ventas')"
+      >
+        <v-list-tile-action>
+          <v-icon>attach_money</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Ventas</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
       <!-- <v-list-tile
@@ -63,7 +74,7 @@
         </v-list-tile-content>
       </v-list-tile> -->
       <v-list-group
-        v-if="$store.state.auth.user.superadmin"
+        v-if="$store.state.auth.user.user_type == 1"
         v-model="item.model"
         :prepend-icon="item.model ? item.icon : item['icon-alt']"
         append-icon

@@ -15,6 +15,7 @@ use App\StockMovement;
 use App\Notification;
 use App\NotificationEvent;
 use App\Purchase;
+use App\Sale;
 use Illuminate\Http\Request;
 
 class NotificationEventController extends Controller
@@ -78,6 +79,9 @@ class NotificationEventController extends Controller
 						])->orderBy('created_at','desc')->get(),
 						'purchases' => Purchase::with([
 							'office','supplier','user'
+						])->orderBy('created_at','desc')->get(),
+						'sales' => Sale::with([
+							'office','customer','user'
 						])->orderBy('created_at','desc')->get(),
 						
 					];

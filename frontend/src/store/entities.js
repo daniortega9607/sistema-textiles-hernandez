@@ -15,7 +15,8 @@ const state = {
     stock_movements: [],
     stocks: [],
     suppliers: [],
-    users: []
+    users: [],
+    sales: []
 }
 const getters = {
     getItems: store => ({ entity, params = { office: null } }) => {
@@ -183,7 +184,8 @@ const mutations = {
             stock_movements: [],
             stocks: [],
             suppliers: [],
-            users: []
+            users: [],
+            sales: []
         });
     },
 };
