@@ -27,4 +27,10 @@ class Product extends Model
     {
         return $this->belongsTo('App\Color')->withTrashed();
     }
+
+    protected $casts = [
+        'fabric_id' => 'integer',
+        'design_id' => 'integer',
+        'color_id' => 'integer',
+    ];
 }

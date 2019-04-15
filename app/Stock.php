@@ -39,4 +39,9 @@ class Stock extends Model
     {
         return $this->hasOneThrough('App\Color', 'App\Product','id','id','product_id','color_id')->withTrashed();
     }
+
+    protected $casts = [
+        'office_id' => 'integer',
+        'product_id' => 'integer',
+    ];
 }
