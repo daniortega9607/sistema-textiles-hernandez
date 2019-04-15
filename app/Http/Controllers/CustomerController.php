@@ -21,6 +21,7 @@ class CustomerController extends Controller
             'name','rfc','street','number','number_2','zip_code','suburb',
             'state','city','country','use_cfdi','uid'
         ]);
+        $data['user_id'] = $request->user()->id;
 
         $item = Customer::create($data);
 

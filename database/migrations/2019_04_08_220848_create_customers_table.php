@@ -35,6 +35,7 @@ class CreateCustomersTable extends Migration
             $table->string('uid', 18)->nullable();
             $table->integer('credit_days')->nullable();
             $table->string('comments',1000)->nullable();
+            $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();
         });

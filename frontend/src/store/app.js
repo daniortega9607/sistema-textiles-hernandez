@@ -3,11 +3,16 @@ const emptySale = {
     articles: [],
     balance: 0,
     total: 0,
-    stock: true,
+    update_stock: true,
     customer_id: null,
-    article_id: null,
-    article_selected: [],
-    article_quantity: null
+    article: {
+        description: null,
+        id: null,
+        quantity: null,
+        price: null
+    },
+    article_quantity: null,
+    article_price: null
 }
 
 const state = {

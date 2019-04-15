@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::apiResource('/products', 'ProductController');
     Route::apiResource('/suppliers', 'SupplierController');
     Route::apiResource('/stocks', 'StockController');
+    Route::apiResource('/sales', 'SaleController');
     Route::apiResource('/stock_details', 'StockDetailController');
     Route::apiResource('/stock_movements', 'StockMovementController');
     Route::apiResource('/stock_movement_details', 'StockMovementDetailController');

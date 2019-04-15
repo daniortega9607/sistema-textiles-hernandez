@@ -12,7 +12,7 @@ class StockDetailController extends Controller
     public function store(Request $request)
     {
         $stockDetail = $request->only([
-            'stock_id','quantity'
+            'stock_id','quantity','buy_price'
         ]);
         $stockDetail['user_id'] = $request->user()->id;
 

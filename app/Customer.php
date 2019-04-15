@@ -12,6 +12,6 @@ class Customer extends Model
     protected $fillable = [
         'first_name','last_name','email','email_2','email_3','telephone',
         'name','rfc','street','number','number_2','zip_code','suburb',
-        'state','city','country','use_cfdi','uid',
+        'state','city','country','use_cfdi','uid','user_id'
     ];
 }

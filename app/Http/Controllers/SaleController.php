@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Sale;
+use App\Customer;
 use App\NotificationEvent;
+use App\Notification;
 use App\Entity;
+use App\User;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -32,12 +35,55 @@ class SaleController extends Controller
 
         $item = Sale::create($sale);
 
-        NotificationEvent::create([
-            'entity_id' => Entity::where('name','sales')->first()->id,
-            'entity_value_id' => $item->id,
-            'type' => 1
-        ]);
+        if(isset($request->customer) && is_null($request->customer_id) 
+            && !is_null($request->customer)){
 
+            $customer = Customer::create(['name' => $request->customer,'user_id' => $request->user()->id]);
+            $sale->customer_id = $customer->id;    
+            $sale->save(); 
+        }
+
+        $now = date('Y-m-d h:i:s');
+
+        $users = User::where('user_type', 1)->where('id','!=',$request->user()->id)->get();
+        $notifications = [];
+
+        foreach ($users as $key => $value) {
+            $notifications[] = [
+                'entity_id' => Entity::where('name','sales')->first()->id,
+                'entity_value_id' => $item->id,
+                'created_at' => $now,
+                'message' => $request->user()->name.' ha creado una venta',
+                'user_id' => $value['id']
+            ];
+        }
+        if(count($notifications) > 0) {
+            Notification::insert($notifications);
+        }
+
+        NotificationEvent::insert([
+            [
+                'entity_id' => Entity::where('name','sales')->first()->id,
+                'entity_value_id' => $item->id,
+                'created_at' => $now,
+                'updated_at' => $now,
+                'type' => 1
+            ],
+            [
+                'entity_id' => Entity::where('name','stocks')->first()->id,
+                'entity_value_id' => NULL,
+                'created_at' => $now,
+                'updated_at' => $now,
+                'type' => 2
+            ],
+            [
+                'entity_id' => Entity::where('name','notifications')->first()->id,
+                'entity_value_id' => NULL,
+                'created_at' => $now,
+                'updated_at' => $now,
+                'type' => 2
+            ]
+        ]);
         return response()->json([
             'status' => (bool) $item,
             'data'   => $item,

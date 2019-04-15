@@ -54,7 +54,7 @@ export default {
       notifications.addEventListener(
         "open",
         event => {
-          if (retries !== 3) {
+          if (retries !== 3 && retries < 2) {
             retries = 3;
             incremental_retry = 5;
             this.$store.state.app.alerts.push({

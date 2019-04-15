@@ -28,7 +28,7 @@
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile
-        v-if="$store.state.auth.user.user_type == 1"
+        v-if="$store.state.auth.user.user_type == 1 || $store.state.auth.user.user_type == 2"
         @click="$router.push('/ventas')"
       >
         <v-list-tile-action>

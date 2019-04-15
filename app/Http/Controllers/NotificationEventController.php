@@ -60,6 +60,13 @@ class NotificationEventController extends Controller
 				
 				if(!isset($request->last_event_id) && !$firstCheck) {
 					$firstCheck = true;
+					$sales = Sale::with([
+						'office','customer','user'
+					]);
+					if ($user->user_type == 2) {
+						$sales->where('user_id',$user->user_type);
+					}
+					$sales = $sales->orderBy('created_at','desc')->get();
 					$values = [
 						'offices' => Office::all(),
 						'colors' => Color::all(),
@@ -80,9 +87,7 @@ class NotificationEventController extends Controller
 						'purchases' => Purchase::with([
 							'office','supplier','user'
 						])->orderBy('created_at','desc')->get(),
-						'sales' => Sale::with([
-							'office','customer','user'
-						])->orderBy('created_at','desc')->get(),
+						'sales' => $sales,
 						
 					];
 					echo "event: initValues\n";

@@ -28,13 +28,19 @@ const getters = {
         }
         return items;
     },
-    getSearchableItems: store => ({ entity, keys = ['name'] }) => store[entity].map((item) => {
-        let text = '';
-        keys.forEach((key) => {
-            text += `${getDataFromKey(item, key.split('.')) ? `${getDataFromKey(item, key.split('.'))} ` : ''}`;
-        });
-        return { text, value: item.id };
-    }),
+    getSearchableItems: store => ({ entity, keys = ['name'], user_id }) => {
+        let items = store[entity];
+        if (user_id) {
+            items = items.filter(item => item.user_id ? item.user_id === user_id: true);
+        }
+        return items.map((item) => {
+            let text = '';
+            keys.forEach((key) => {
+                text += `${getDataFromKey(item, key.split('.')) ? `${getDataFromKey(item, key.split('.'))} ` : ''}`;
+            });
+            return { text, value: item.id };
+        })
+    },
     getStockDetails: store => ({ office, product, quantity, selected }) => {
         const stocks = [];
         store.stocks.filter(item => item.office_id === office).forEach(item => {
@@ -48,14 +54,18 @@ const getters = {
                 }
                 stocks.push({
                     ...detail,
-                    design: item.design.name,
-                    color: item.color.name,
-                    product: `${item.product.sku} ${item.fabric.name}${item.design.name ? ' ' + item.design.name : ''}${item.color.name ? ' ' + item.color.name : ''}`,
+                    design: item.design ? item.design.name : item.design,
+                    color: item.color ? item.color.name : item.color,
+                    product: `${item.product.sku} ${item.fabric.name}${item.design ? ' ' + item.design.name : ''}${item.color ? ' ' + item.color.name : ''}`,
                     fabric: item.fabric.name,
+                    product_id: item.product_id,
                 })
             })
         })
         return stocks;
+    },
+    getNotifications: store => ({ user_id }) => {
+        return store.notifications.filter(item => item.user_id === user_id && item.status == 1)
     }
 }
 const actions = {
@@ -81,7 +91,7 @@ const actions = {
                     url: `/api/${item.entity.name}/${item.entity_value_id}`,
                 });
                 if (!err) {
-                    const findIndex = state[item.entity.name].find(item => item.id == createdValue.id);
+                    const findIndex = state[item.entity.name].findIndex(item => item.id == createdValue.id);
                     if(findIndex === -1){
                         commit('onCreate', { entity: item.entity.name, createdValue });
                     }
