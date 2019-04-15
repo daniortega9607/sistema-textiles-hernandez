@@ -97,11 +97,13 @@ export default {
               incremental_retry = incremental_retry * 2;
               this.setupStream();
             }, 1000 * incremental_retry);
-            this.$store.state.app.alerts.push({
-              show: true,
-              status: false,
-              message: `Hay un error con su conexion, intentando restablecer en ${incremental_retry} segundos`
-            })
+            if(incremental_retry != 5) {
+              this.$store.state.app.alerts.push({
+                show: true,
+                status: false,
+                message: `Hay un error con su conexion, intentando restablecer en ${incremental_retry} segundos`
+              })
+            }
           } else {
             this.$store.state.app.alerts.push({
               show: true,
