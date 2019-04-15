@@ -38,6 +38,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'superadmin' => 'boolean',
+        'user_type' => 'integer',
+        'customer_id' => 'integer',
     ];
 
     public function user_permissions(){

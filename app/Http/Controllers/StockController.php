@@ -47,14 +47,14 @@ class StockController extends Controller
             ]));
         }
 
-        $stocks = $request->stocks;
+        $stocks = $request->details;
 
-        if(count((array)$stocks) > 0) {
+        if(count($stocks) > 0) {
             foreach ($stocks as $key => $value) {
                 $stocks[$key]['user_id'] = $request->user()->id;
             }
-            $item->stocks()->createMany($stocks);
-            $item->stock = $item->stocks()->sum('quantity');
+            $item->details()->createMany($stocks);
+            $item->stock = $item->details()->sum('quantity');
             $item->save();
         }
         

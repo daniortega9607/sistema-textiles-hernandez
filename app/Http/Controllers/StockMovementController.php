@@ -53,7 +53,7 @@ class StockMovementController extends Controller
 
         $stocks = $request->stocks;
 
-        if(count((array)$stocks) > 0) {
+        if(count($stocks) > 0) {
             foreach ($stocks as $key => $value) {
                 $stocks[$key]['stock_detail_id'] = $value['id'];
                 $fromStockDetail = StockDetail::find($value['id']);
@@ -91,7 +91,7 @@ class StockMovementController extends Controller
                 'user_id' => $value['id']
             ];
         }
-        if(count((array)$notifications) > 0) {
+        if(count($notifications) > 0) {
             Notification::insert($notifications);
         }
 
