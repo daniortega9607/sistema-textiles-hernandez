@@ -66,7 +66,7 @@ class ProductController extends Controller
 
         return response()->json([
             'status' => (bool) $item,
-            'data'   => $item,
+            'data'   => $item->with(['fabric','color','design'])->find($item->id),
             'message' => (bool) $item ? trans('global.created') : trans('global.error_created')
         ]);
     }
