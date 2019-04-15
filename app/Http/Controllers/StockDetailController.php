@@ -18,7 +18,7 @@ class StockDetailController extends Controller
 
         $item = StockDetail::create($stockDetail);
 
-        $item->stock->stock = $item->stock->stocks()->sum('quantity');
+        $item->stock->stock = $item->stock->details()->sum('quantity');
         $item->stock->save();
 
         NotificationEvent::create([
@@ -61,7 +61,7 @@ class StockDetailController extends Controller
     {
         $status = $stockDetail->delete();
 
-        $stockDetail->stock->stock = $stockDetail->stock->stocks()->sum('quantity');
+        $stockDetail->stock->stock = $stockDetail->stock->details()->sum('quantity');
         $stockDetail->stock->save();
 
         NotificationEvent::create([

@@ -70,7 +70,7 @@ class NotificationEventController extends Controller
 						'customers' => Customer::all(),
 						'suppliers' => Supplier::all(),
 						'users' => User::with(['customer'])->get(),
-						'stocks' => Stock::with(['office','product.fabric','product.color','product.design','stocks'])->get(),
+						'stocks' => Stock::with(['office','product','fabric','color','design','details'])->get(),
 						'stock_movements' => StockMovement::with([
 							'office','to_office',
 							'stocks.stockDetail.stock.product.fabric',

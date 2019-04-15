@@ -20,8 +20,23 @@ class Stock extends Model
         return $this->belongsTo('App\Product')->withTrashed();
     }
 
-    public function stocks()
+    public function details()
     {
         return $this->hasMany('App\StockDetail');
+    }
+
+    public function fabric()
+    {
+        return $this->hasOneThrough('App\Fabric', 'App\Product','id','id','product_id','fabric_id')->withTrashed();
+    }
+
+    public function design()
+    {
+        return $this->hasOneThrough('App\Design', 'App\Product','id','id','product_id','design_id')->withTrashed();
+    }
+
+    public function color()
+    {
+        return $this->hasOneThrough('App\Color', 'App\Product','id','id','product_id','color_id')->withTrashed();
     }
 }

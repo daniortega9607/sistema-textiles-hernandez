@@ -11,7 +11,7 @@ class StockController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Stock::select('*')->with(['office','product.fabric','product.color','product.design','stocks']);
+        $query = Stock::select('*')->with(['office','product','fabric','color','design','details']);
         /*if (isset($request->search)) {
             $query->where('name','like','%'.$request->search.'%');
         }
@@ -74,7 +74,9 @@ class StockController extends Controller
 
         return response()->json([
             'status' => (bool) $item,
-            'data'   => $item,
+            'data'   => $item->with([
+                'office','product','fabric','color','design','details'
+            ])->find($item->id),
             'message' => (bool) $item ? trans('global.created') : trans('global.error_created')
         ]);
     }
@@ -82,7 +84,7 @@ class StockController extends Controller
     public function show(Stock $stock)
     {
         return response()->json($stock->with([
-            'office','product.fabric','product.color','product.design','stocks'
+            'office','product','fabric','color','design','details'
         ])->find($stock->id),200);         
     }
 
