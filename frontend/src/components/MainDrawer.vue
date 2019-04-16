@@ -38,6 +38,17 @@
           <v-list-tile-title>Ventas</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+      <v-list-tile
+        v-if="$store.state.auth.user.user_type == 2"
+        @click="$router.push('/clientes')"
+      >
+        <v-list-tile-action>
+          <v-icon>list_alt</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Clientes</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
       <!-- <v-list-tile
         v-if="$store.state.auth.user.superadmin"
         @click="$router.push('/envios-almacen')"
